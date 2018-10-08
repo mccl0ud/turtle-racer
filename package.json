@@ -8,7 +8,7 @@
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>tests/testSetup.js"
-  }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ark234/turtle-racer.git"
