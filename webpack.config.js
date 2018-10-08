@@ -31,7 +31,7 @@ module.exports = {
   },
   // Configurations for webpack-dev-server
   devServer: {
-    port: 3000, // webpack-dev-server port to listen on
+    port: 3333, // webpack-dev-server port to listen on
     open: true, // automatically open homepage on startup
     proxy: {
       '/': 'http://localhost:3000' // Express server to send API requests to
