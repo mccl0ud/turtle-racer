@@ -8,8 +8,9 @@
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon -e js src/server/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test": "jest --coverage",
+    "test:watch": "npm test -- --watch",
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
   },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
@@ -46,6 +47,7 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^4.0.1",
+    "coveralls": "^3.0.2",
     "css-loader": "^1.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
