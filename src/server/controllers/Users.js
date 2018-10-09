@@ -6,10 +6,13 @@ module.exports = {
 
   createUserMiddleWare: function(req, res, next) {
     // This is where we obtain the hash of the user's password
-    console.log('creating user: ', user);
+    console.log('creating user: ', req.body.username);
     const passwordDigest = bcrypt.hashSync(password, 10);
     User.createUser(user, passwordDigest)
-      .then(res => next())
+      .then(user => {
+        res.locals.newTokenData = user[0].username;
+        next()
+      })
       .catch(err => console.log('Error creating user ', err));
   },
 

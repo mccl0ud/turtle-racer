@@ -3,6 +3,7 @@ const express = require('express');
 
 // Controlla's
 const UserController = require('./controllers/Users');
+const Token = require('./services/TokenService');
 
 // Configure Express application server
 const app = express();
@@ -17,8 +18,14 @@ app.use((err, req, res, next) => {
 // authorize users still need to be accomplished
 app.post('/signUp', 
   UserController.createUserMiddleWare, 
+  Token.createToken,
+  Token.sendToken,
+  
+);
+
+app.post('/login', 
+  UserController.verifyUserMiddleware, 
   UserController.authorizeUserMiddleWare, 
-  UserController.startSession
 );
 
 module.exports = app

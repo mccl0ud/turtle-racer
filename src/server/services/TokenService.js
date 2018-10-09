@@ -22,6 +22,11 @@ class Token {
     return jwt.decode(token);
   }
 
+  sendToken(req, res, next) {
+    res.json({ token: res.locals.token });
+    next();
+  }
+
   // Middleware for creating token
   createToken(req, res, next) {
     jwt.sign(res.locals.newTokenData, process.env.SECRET, (err, jwt) => {
