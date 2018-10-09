@@ -2,57 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow } from '../enzyme';
 
-/**
- * Render a list of items
- * @param {Object} props - List of items
- */
+import App from '../../src/client/App';
 
-function List(props) {
-  const { items } = props;
-  if (!items.length) {
-    // No Items on the list, render an empty message
-    return <span className="empty-message">No items in list</span>;
-  }
+describe('App.jsx', () => {
+  test('contains Hello World', () => {
+    const wrapper = shallow(<App />);
 
-  return (
-    <ul className="list-items">
-      {items.map(item => <li key={item} className="item">{item}</li>)}
-    </ul>
-  );
-}
-
-List.propTypes = {
-  items: PropTypes.array,
-};
-
-List.defaultProps = {
-  items: [],
-};
-
-describe('List tests', () => {
-
-  it('renders list-items', () => {
-    const items = ['one', 'two', 'three'];
-    const wrapper = shallow(<List items={items} />);
-
-    // Expect the wrapper object to be defined
-    expect(wrapper.find('.list-items')).toBeDefined();
-    expect(wrapper.find('.item')).toHaveLength(items.length);
+    // Check if the text inside of App is 'Hello World'
+    expect(wrapper.contains('Hello World')).toBeTruthy();
   });
 
-  it('renders a list item', () => {
-    const items = ['Thor', 'Loki'];
-    const wrapper = shallow(<List items={items} />);
+  test('renders a header', () => {
+    const wrapper = shallow(<App />);
 
-    // Check if an element in the Component exists
-    expect(wrapper.contains(<li key='Thor' className="item">Thor</li>)).toBeTruthy();
-  });
-
-  it('renders correct text in item', () => {
-    const items = ['John', 'James', 'Luke'];
-    const wrapper = shallow(<List items={items} />);
-
-    //Expect the child of the first item to be an array
-    expect(wrapper.find('.item').get(0).props.children).toEqual('John');
+    // Check if the header has been shallow rendered
+    expect(wrapper.find('h1')).toHaveLength(1);
   });
 });
