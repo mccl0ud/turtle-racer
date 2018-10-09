@@ -29,10 +29,11 @@ app.post('/signUp',
   Token.sendToken
 );
 
-// app.post('/login', 
-//   UserController.verifyUserMiddleware, 
-//   UserController.authorizeUserMiddleWare, 
-// );
+app.post('/login', 
+  UserController.verifyUserMiddleware, 
+  Token.createToken,
+  Token.sendToken
+);
 
 // connect to server
 app.listen(4000, () => console.log('listening...'))

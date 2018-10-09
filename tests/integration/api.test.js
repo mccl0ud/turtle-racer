@@ -6,11 +6,10 @@ const app = require('../../src/server/app.js');
  */
 
 describe('POST /sign_up', function () {
-  xit('respond with status code 200 upon successfully creating a user', function (done) {
+  xit('set upon successfully creating a user', function (done) {
       request(app)
           .post('/signUp')
-          // sending data, username and password
-          // set header
+          .send({ "username": "test", "password": "123" })
           .set('Accept', 'application/json')
           .expect(200, done);
   });

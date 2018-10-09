@@ -19,8 +19,9 @@ module.exports = {
   verifyUserMiddleware: function(req, res, next) {
     console.log('verifying user', req.body.username);
     User.findUser(req.body.username)
-      .then(row => {
-        if (bcrypt.compareSync(req.body.password, row[0].password_digest))
+      .then(user => {
+        if (bcrypt.compareSync(req.body.password, user.password_digest))
+          res.locals.newTokenData = user.username;
           next();
       })
       .catch(err => {
