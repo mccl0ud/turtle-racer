@@ -10,8 +10,6 @@ module.exports = {
     const passwordDigest = bcrypt.hashSync(req.body.password, 10);
     User.createUser(req.body.username, passwordDigest)
       .then(user => {
-        console.log('checking to see if returned ', user);
-        console.log("user =", user)
         res.locals.newTokenData = user.username;
         next()
       })
