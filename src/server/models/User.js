@@ -1,5 +1,5 @@
 // Import dependencies
-const db = require('../db/index.js');
+const db = require('./../DB/index.js');
 
 const userModel = {};
 
