@@ -15,17 +15,22 @@ app.use((err, req, res, next) => {
   res.send(err);
 });
 
+// parse incoming JWT's
+app.use(Token.receiveToken);
+
 // authorize users still need to be accomplished
 app.post('/signUp', 
   UserController.createUserMiddleWare, 
   Token.createToken,
   Token.sendToken,
-  
+  (req, res) => {
+    res.redirect('/');
+  }
 );
 
-app.post('/login', 
-  UserController.verifyUserMiddleware, 
-  UserController.authorizeUserMiddleWare, 
-);
+// app.post('/login', 
+//   UserController.verifyUserMiddleware, 
+//   UserController.authorizeUserMiddleWare, 
+// );
 
 module.exports = app
