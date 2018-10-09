@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { shallow } from '../enzyme';
+import { shallow } from './enzyme';
 
 /**
  * Render a list of items
@@ -16,21 +16,24 @@ function List(props) {
 
   return (
     <ul className="list-items">
-      {items.map(item => <li key={item} className="item">{item}</li>)}
+      {items.map(item => (
+        <li key={item} className="item">
+          {item}
+        </li>
+      ))}
     </ul>
   );
 }
 
 List.propTypes = {
-  items: PropTypes.array,
+  items: PropTypes.array
 };
 
 List.defaultProps = {
-  items: [],
+  items: []
 };
 
 describe('List tests', () => {
-
   it('renders list-items', () => {
     const items = ['one', 'two', 'three'];
     const wrapper = shallow(<List items={items} />);
@@ -45,7 +48,13 @@ describe('List tests', () => {
     const wrapper = shallow(<List items={items} />);
 
     // Check if an element in the Component exists
-    expect(wrapper.contains(<li key='Thor' className="item">Thor</li>)).toBeTruthy();
+    expect(
+      wrapper.contains(
+        <li key="Thor" className="item">
+          Thor
+        </li>
+      )
+    ).toBeTruthy();
   });
 
   it('renders correct text in item', () => {
