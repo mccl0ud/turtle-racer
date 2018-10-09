@@ -1,7 +1,10 @@
-const pgp = require('pg-promise')();
+const pgp = require('pg-promise')(/* options */);
 require('dotenv').config();
 
 // connect to DB
-const db = pgp(process.env.SQL_URL);
+// unsure why process.env.PGURI is not working
+const db = pgp("postgres://lzifmynw:hdBiND6R1SbP7oYgmqOUct4MTeAHa5K_@pellefant.db.elephantsql.com:5432/lzifmynw");
 
-module.exports=db;
+db.connect();
+
+module.exports = db;

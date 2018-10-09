@@ -4,9 +4,10 @@ const db = require('../db/index.js');
 const userModel = {};
 
 userModel.createUser = function(user, password) {
-	return db.none(
-		'INSERT INTO users (user, password_digest) VALUES ($1, $2);',
-		[user, password]
+	return db.oneOrNone(
+    'INSERT INTO users (username, password_digest, wpm_avg, completed_races) VALUES ($1, $2, $3, $4) RETURNING *;',
+    // all users should start with 0 wpm/completed races
+		[user, password, 0, 0]
 	);
 };
 

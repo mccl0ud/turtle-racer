@@ -1,5 +1,6 @@
 // Global dependencies
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // Controlla's
 const UserController = require('./controllers/Users');
@@ -15,6 +16,9 @@ app.use((err, req, res, next) => {
   res.send(err);
 });
 
+// parse application/json
+app.use(bodyParser.json());
+
 // parse incoming JWT's
 app.use(Token.receiveToken);
 
@@ -22,15 +26,15 @@ app.use(Token.receiveToken);
 app.post('/signUp', 
   UserController.createUserMiddleWare, 
   Token.createToken,
-  Token.sendToken,
-  (req, res) => {
-    res.redirect('/');
-  }
+  Token.sendToken
 );
 
 // app.post('/login', 
 //   UserController.verifyUserMiddleware, 
 //   UserController.authorizeUserMiddleWare, 
 // );
+
+// connect to server
+app.listen(4000, () => console.log('listening...'))
 
 module.exports = app

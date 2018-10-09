@@ -8,7 +8,7 @@ const app = require('../../src/server/app.js');
 describe('POST /sign_up', function () {
   xit('respond with status code 200 upon successfully creating a user', function (done) {
       request(app)
-          .post('/sign_up')
+          .post('/signUp')
           // sending data, username and password
           // set header
           .set('Accept', 'application/json')
