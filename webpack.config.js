@@ -20,7 +20,10 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
         }
       },
       {
@@ -31,7 +34,7 @@ module.exports = {
   },
   // Configurations for webpack-dev-server
   devServer: {
-    port: 3000, // webpack-dev-server port to listen on
+    port: 3333, // webpack-dev-server port to listen on
     open: true, // automatically open homepage on startup
     proxy: {
       '/': 'http://localhost:3000' // Express server to send API requests to
@@ -43,7 +46,7 @@ module.exports = {
     new CleanWebpackPlugin([OUPUT_DIRECTORY]),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: './public/favicon.ico'
+      favicon: './public/favicon.png'
     })
   ]
 };
