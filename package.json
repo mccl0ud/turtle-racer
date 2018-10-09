@@ -2,11 +2,11 @@
   "name": "turtle-racer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server/server.js",
   "scripts": {
     "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "nodemon -e js src/server/index.js",
+    "server": "nodemon -e js src/server/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "jest"
   },
