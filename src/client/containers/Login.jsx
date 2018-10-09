@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
   setLoginSignupToggle: bool => dispatch(actions.setLoginSignupToggle(bool))
 });
 
-class Login extends Component {
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
@@ -38,7 +38,7 @@ class Login extends Component {
         <input type="text" name="password" placeholder="Password" />
         <br />
         <input type="submit" value="Login" />
-        <input type="button" value="Create Account" onClick={this.signup} />
+        <input className="button" type="button" value="Create Account" onClick={this.signup} />
       </form>
     );
   }
