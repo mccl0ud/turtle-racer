@@ -1,9 +1,9 @@
-CREATE TABLE "Users" (
-	"ID" serial NOT NULL,
-	"UserName" varchar NOT NULL,
-	"Password" varchar NOT NULL,
-	"W.P.M(average)" int NOT NULL,
-	"CompletedRaces" int NOT NULL,
+CREATE TABLE "users" (
+	"id" serial NOT NULL,
+	"username" varchar NOT NULL UNIQUE,
+	"password_digest" varchar NOT NULL,
+	"wpm_avg" int NOT NULL,
+	"completed_races" int NOT NULL,
 	CONSTRAINT Users_pk PRIMARY KEY ("ID")
 ) WITH (
   OIDS=FALSE
@@ -11,10 +11,10 @@ CREATE TABLE "Users" (
 
 
 
-CREATE TABLE "Prompts" (
-	"ID" serial NOT NULL,
-	"Title" varchar NOT NULL,
-	"Text" varchar NOT NULL,
+CREATE TABLE "prompts" (
+	"id" serial NOT NULL,
+	"title" varchar NOT NULL,
+	"text" varchar NOT NULL,
 	CONSTRAINT Prompts_pk PRIMARY KEY ("ID")
 ) WITH (
   OIDS=FALSE
@@ -22,12 +22,12 @@ CREATE TABLE "Prompts" (
 
 
 
-CREATE TABLE "User History" (
-	"ID" serial NOT NULL,
-	"UserID" int NOT NULL,
-	"Prompt ID" int NOT NULL,
-	"W.P.M" int NOT NULL,
-	"Date" serial NOT NULL,
+CREATE TABLE "user history" (
+	"id" serial NOT NULL,
+	"user_id" int NOT NULL,
+	"prompt_id" int NOT NULL,
+	"wpm" int NOT NULL,
+	"date" serial NOT NULL,
 	CONSTRAINT User History_pk PRIMARY KEY ("ID")
 ) WITH (
   OIDS=FALSE
