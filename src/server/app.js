@@ -3,7 +3,6 @@ const express = require('express');
 
 // Configure Express application server
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
@@ -12,5 +11,4 @@ app.use((err, req, res, next) => {
   res.send(err);
 });
 
-// Start server
-app.listen(PORT, () => console.log('Server started on port', PORT));
+module.exports = app
