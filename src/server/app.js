@@ -22,7 +22,6 @@ app.use(bodyParser.json());
 // parse incoming JWT's
 app.use(Token.receiveToken);
 
-// authorize users still need to be accomplished
 app.post('/signUp', 
   UserController.createUserMiddleWare, 
   Token.createToken,
