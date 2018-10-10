@@ -42,7 +42,6 @@ class Token {
       message: "Auth successful", 
       token: res.locals.token
     });
-    // next();
   }
 
   // Middleware for creating token
@@ -56,10 +55,11 @@ class Token {
         expiresIn: "1h"
       },
       (err, jwt) => {
-      if (err) console.error('Error in TokenService.createToken:', err);
-      res.locals.token = jwt;
-      next();
-    });
+        if (err) console.error('Error in TokenService.createToken:', err);
+        res.locals.token = jwt;
+        next();
+      }
+    );
   }
 }
 
