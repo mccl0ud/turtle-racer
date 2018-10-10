@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 
 class Token {
   // Checks if the token is valid
@@ -20,6 +20,11 @@ class Token {
   // Decodes token according to token headers
   decode(token) {
     return jwt.decode(token);
+  }
+
+  sendToken(req, res, next) {
+    res.json({ token: res.locals.token });
+    next();
   }
 
   // Middleware for creating token
