@@ -17,7 +17,7 @@ class Token {
     next();
   }
 
-  // Checks for JWT in header
+  // Checks for JWT in header to restrict routes
   checkAuth(req, res, next) {
     try {
       const token = req.headers.authorization.split(" ")[1];
