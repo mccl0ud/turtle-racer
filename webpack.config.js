@@ -34,10 +34,10 @@ module.exports = {
   },
   // Configurations for webpack-dev-server
   devServer: {
-    port: 3333, // webpack-dev-server port to listen on
+    port: 8888, // webpack-dev-server port to listen on
     open: true, // automatically open homepage on startup
     proxy: {
-      '/': 'http://localhost:3000' // Express server to send API requests to
+      '/': 'http://localhost:3333' // Express server to send API requests to
     }
   },
   // clean-webpack-plugin removes build folder(s) before building
