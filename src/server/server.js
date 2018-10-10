@@ -1,8 +1,8 @@
-// Global dependencies
-const PORT = process.env.PORT || 3000;
+// Import app server (need to export connection for supertest)
+const server = require('./app');
 
 // Configure Express application server
-const app = './app';
+const PORT = process.env.PORT || 3333;
 
 // Start server
-app.listen(PORT, () => console.log('Server started on port', PORT));
+server.listen(PORT, () => console.log('Server started on port', PORT));
