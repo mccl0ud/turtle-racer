@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 
 class Token {
   // Checks if the token is valid
@@ -17,18 +17,49 @@ class Token {
     next();
   }
 
+  // Checks for JWT in header to restrict routes
+  checkAuth(req, res, next) {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      console.log(token);
+      const decoded = jwt.verify(token, process.env.SECRET)
+      req.userData = decoded;
+      next();
+    } catch (error) {
+      return res.status(401).json({
+        message: 'Auth Failed'
+      });
+    }
+  };
+
   // Decodes token according to token headers
   decode(token) {
     return jwt.decode(token);
   }
 
+  sendToken(req, res, next) {
+    res.status(200).json({
+      message: "Auth successful", 
+      token: res.locals.token
+    });
+  }
+
   // Middleware for creating token
   createToken(req, res, next) {
-    jwt.sign(res.locals.newTokenData, process.env.SECRET, (err, jwt) => {
-      if (err) console.error('Error in TokenService.createToken:', err);
-      res.locals.token = jwt;
-      next();
-    });
+    jwt.sign(
+      {
+        user: res.locals.newTokenData
+      },
+      process.env.SECRET,
+      {
+        expiresIn: "1h"
+      },
+      (err, jwt) => {
+        if (err) console.error('Error in TokenService.createToken:', err);
+        res.locals.token = jwt;
+        next();
+      }
+    );
   }
 }
 

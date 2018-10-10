@@ -1,34 +1,34 @@
-CREATE TABLE "users" (
+CREATE TABLE users (
 	"id" serial NOT NULL,
 	"username" varchar NOT NULL UNIQUE,
 	"password_digest" varchar NOT NULL,
 	"wpm_avg" int NOT NULL,
 	"completed_races" int NOT NULL,
-	CONSTRAINT Users_pk PRIMARY KEY ("ID")
+	CONSTRAINT users_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
 
 
 
-CREATE TABLE "prompts" (
+CREATE TABLE prompts (
 	"id" serial NOT NULL,
 	"title" varchar NOT NULL,
 	"text" varchar NOT NULL,
-	CONSTRAINT Prompts_pk PRIMARY KEY ("ID")
+	CONSTRAINT prompts_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
 
 
 
-CREATE TABLE "user history" (
+CREATE TABLE user_history (
 	"id" serial NOT NULL,
 	"user_id" int NOT NULL,
 	"prompt_id" int NOT NULL,
 	"wpm" int NOT NULL,
 	"date" serial NOT NULL,
-	CONSTRAINT User History_pk PRIMARY KEY ("ID")
+	CONSTRAINT user_history_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -37,6 +37,6 @@ CREATE TABLE "user history" (
 
 
 
-ALTER TABLE "User History" ADD CONSTRAINT "User History_fk0" FOREIGN KEY ("UserID") REFERENCES "Users"("ID");
-ALTER TABLE "User History" ADD CONSTRAINT "User History_fk1" FOREIGN KEY ("Prompt ID") REFERENCES "Prompts"("ID");
+ALTER TABLE "user_history" ADD CONSTRAINT "user_history_fk0" FOREIGN KEY ("user_id") REFERENCES "users"("id");
+ALTER TABLE "user_history" ADD CONSTRAINT "user_history_fk1" FOREIGN KEY ("prompt_id") REFERENCES "prompts"("id");
 

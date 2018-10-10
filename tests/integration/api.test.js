@@ -1,16 +1,16 @@
 const request = require('supertest');
-const app = require('../../src/server/app.js');
+// const app = require('../../src/server/app.js');
+// const db = require('../../src/server/DB/index')
 
 /**
  * Testing user endpoints
  */
 
 describe('POST /sign_up', function () {
-  xit('respond with status code 200 upon successfully creating a user', function (done) {
+  xit('set upon successfully creating a user', function (done) {
       request(app)
-          .post('/sign_up')
-          // sending data, username and password
-          // set header
+          .post('/signUp')
+          .send({ "username": "test", "password": "123" })
           .set('Accept', 'application/json')
           .expect(200, done);
   });
@@ -67,4 +67,6 @@ describe('POST /save_results', function () {
           .expect(200, done);
   });
 });
+
+// afterAll(db.$pool.end);
 
