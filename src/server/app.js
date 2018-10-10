@@ -11,9 +11,6 @@ const Token = require('./services/TokenService');
 // Configure Express application server
 const app = express();
 
-// const decoded = Token.decode("eyJhbGciOiJIUzI1NiJ9.aGVsbG8.5WeZGyDtzkaWQbci6JaZ1yISkklVdyUEGiXyFyy3Q8M");
-// console.log("decoded", decoded);
-
 // Error-handling middleware
 app.use((err, req, res, next) => {
   console.error('Server Error Encountered:', err);
@@ -24,13 +21,10 @@ app.use((err, req, res, next) => {
 // parse application/json
 app.use(bodyParser.json());
 
-// parse incoming JWT's
-app.use(Token.receiveToken);
-
 // setting up '/' route
 app.get('/', Token.checkAuth, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
-})
+});
 
 // authorize users still need to be accomplished
 app.post('/signUp', 
@@ -45,15 +39,15 @@ app.post('/login',
   Token.sendToken
 );
 
-app.get('/getRandomPrompt', PromptController.getRandom)
+app.get('/getRandomPrompt', PromptController.getRandom);
 
 // route to get a specified prompt from the database
-app.post('/getSpecPrompt', PromptController.findOne)
+app.post('/getSpecPrompt', PromptController.findOne);
 
 // route to post a prompt to database
-app.post('/addPrompt', PromptController.addPrompt)
+app.post('/addPrompt', PromptController.addPrompt);
 
 // connect to server
-app.listen(4000, () => console.log('listening...'))
+app.listen(4000, () => console.log('listening...'));
 
-module.exports = app
+module.exports = app;
