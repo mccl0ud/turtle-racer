@@ -17,19 +17,45 @@ class Token {
     next();
   }
 
+  // Checks for JWT in header
+  checkAuth(req, res, next) {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      console.log(token);
+      const decoded = jwt.verify(token, process.env.SECRET)
+      req.userData = decoded;
+      next();
+    } catch (error) {
+      return res.status(401).json({
+        message: 'Auth Failed'
+      });
+    }
+  };
+
   // Decodes token according to token headers
   decode(token) {
     return jwt.decode(token);
   }
 
   sendToken(req, res, next) {
-    res.json({ token: res.locals.token });
-    next();
+    res.status(200).json({
+      message: "Auth successful", 
+      token: res.locals.token
+    });
+    // next();
   }
 
   // Middleware for creating token
   createToken(req, res, next) {
-    jwt.sign(res.locals.newTokenData, process.env.SECRET, (err, jwt) => {
+    jwt.sign(
+      {
+        user: res.locals.newTokenData
+      },
+      process.env.SECRET,
+      {
+        expiresIn: "1h"
+      },
+      (err, jwt) => {
       if (err) console.error('Error in TokenService.createToken:', err);
       res.locals.token = jwt;
       next();
