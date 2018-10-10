@@ -4,6 +4,5 @@ node_js:
 cache:
   directories:
     - 'node_modules'
-test:
-  override:
-    - npm run test-ci
+script:
+  - npm run test-ci
